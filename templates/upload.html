@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload File</title>
+</head>
+<body>
+    <h1>Upload File</h1>
+    <form method="POST" action="/" enctype="multipart/form-data">
+        <label for="email_id">Email ID (Mandatory):</label>
+        <input type="text" name="email_id" id="email_id" required><br><br>
+        
+        <label for="filename">Filename (Mandatory):</label>
+        <input type="text" name="filename" id="filename" required><br><br>
+        
+        <label for="file">Select File:</label>
+        <input type="file" name="file" id="file" accept=".pdf, .txt, .jpg, .png" required><br><br>
+        
+        <input type="submit" value="Upload">
+    </form>
+</body>
+</html>
