@@ -6,11 +6,11 @@ import os
 
 app = Flask(__name__)
 
-# AWS S3 Configuration
+
 s3 = boto3.client('s3')
 S3_BUCKET_NAME = 'bucket-198'
 
-# Upload Feature
+
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
@@ -19,11 +19,9 @@ def upload_file():
         file = request.files['file']
 
         if email_id and filename and file:
-            # Format the S3 object key as emailID_filename
             object_key = f'{email_id}_{filename}'
             try:
                 s3.upload_fileobj(file, S3_BUCKET_NAME, object_key)
-                # Successful upload, redirect to search_files route
                 return redirect(url_for('search_files'))
             except botocore.exceptions.ClientError as e:
                 if e.response['Error']['Code'] == 'AccessDenied':
@@ -50,7 +48,6 @@ def search_files():
 
     return render_template('search.html')
 
-# Download Feature
 @app.route('/download/<path:key>')
 def download_file(key):
     # Generate a temporary URL for file download
